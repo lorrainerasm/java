@@ -50,6 +50,30 @@ public class Main {
 				 * System.out.print("Price (per item): "); double price = kb.nextDouble();
 				 */
 			}
+			
+			/*Take a program that you have done in the past and make a variety of changes. */
+			
+			if (option == 'A' || option == 'a') {
+				System.out.println("To Add Product:\nPlease enter a product name: ");
+				String productName = kb.next(); //get a strong input from user
+
+				System.out.println("To Add Product:\nPlease enter a product quantity: ");
+				int productQty = kb.nextInt(); //get an int input from user
+				System.out.println("To Add Product:\nPlease enter a product price: ");
+				double productPrice = kb.nextDouble(); //get decimal input from user
+				AddProduct(productName, productQty, productPrice);
+
+				/*
+				 * System.out.print("Quantity: "); int quantity = kb.nextInt();
+				 * GetProductQty(quantity);
+				 */
+
+				/*
+				 * System.out.print("Price (per item): "); double price = kb.nextDouble();
+				 */
+			}
+			
+			/*Take a screen shot – make sure you pay attention to any commit changes.*/
 
 			if (option == 'D' || option == 'd') {
 				System.out.println("Displaying all products in the DB");
