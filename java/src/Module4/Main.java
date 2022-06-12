@@ -6,17 +6,20 @@ import java.util.logging.Logger;
 import java.sql.*;
 import Module4.Logging;
 
-public class Main {
+//Take a program that you have done in the past and make a variety of changes. 
+//Take a screen shot – make sure you pay attention to any commit changes.
 
+public class Main {
+	
 	/*static Logger logger = Logger.*/
 
 	// Inventory Management System
 	public static ArrayList<Product> products = new ArrayList<Product>();
-
+	
 	public static void main(String[] args) throws SQLException {
 		char option = 'q';
-
-
+	
+                                                                             
 		do {
 
 			System.out.println("Welcome!");
@@ -34,7 +37,7 @@ public class Main {
 			if (option == 'A' || option == 'a') {
 				System.out.println("To Add Product:\nPlease enter a product name: ");
 				String productName = kb.next(); //get a strong input from user
-
+				
 				System.out.println("To Add Product:\nPlease enter a product quantity: ");
 				int productQty = kb.nextInt(); //get an int input from user
 				System.out.println("To Add Product:\nPlease enter a product price: ");
@@ -50,30 +53,6 @@ public class Main {
 				 * System.out.print("Price (per item): "); double price = kb.nextDouble();
 				 */
 			}
-			
-			/*Take a program that you have done in the past and make a variety of changes. */
-			
-			if (option == 'A' || option == 'a') {
-				System.out.println("To Add Product:\nPlease enter a product name: ");
-				String productName = kb.next(); //get a strong input from user
-
-				System.out.println("To Add Product:\nPlease enter a product quantity: ");
-				int productQty = kb.nextInt(); //get an int input from user
-				System.out.println("To Add Product:\nPlease enter a product price: ");
-				double productPrice = kb.nextDouble(); //get decimal input from user
-				AddProduct(productName, productQty, productPrice);
-
-				/*
-				 * System.out.print("Quantity: "); int quantity = kb.nextInt();
-				 * GetProductQty(quantity);
-				 */
-
-				/*
-				 * System.out.print("Price (per item): "); double price = kb.nextDouble();
-				 */
-			}
-			
-			/*Take a screen shot – make sure you pay attention to any commit changes.*/
 
 			if (option == 'D' || option == 'd') {
 				System.out.println("Displaying all products in the DB");
@@ -92,16 +71,16 @@ public class Main {
 	public static void AddProduct(String name, int qty, double price) throws SQLException {
 		Product p = new Product(name, qty, price);
 		products.add(p); // add to the static db
-
+		
 		//insert or add the product
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/walmart", "root", "root");
 		PreparedStatement sql = conn.prepareStatement("insert into products(name, qty, cost) values(?,?,?)");
 		sql.setString(1,name);
 		sql.setInt(2, qty);
 		sql.setDouble(3, price);
-
+		
 		sql.executeUpdate();
-
+		
 		// 2. get the product ID after insert
 		Statement sqlST = conn.createStatement ();
 		ResultSet rs = sqlST.executeQuery("select * from products where name ='" + name + "'");
@@ -110,13 +89,13 @@ public class Main {
 		while(rs.next()) {
 			System.out.println(rs.getString(1) + " " + rs.getString(2));
 		}
-
+		
 		System.out.println("++++++++++++++++++++++++++++++++++\n");
 
 		System.out.println("Insert Successful");
-
+		
 	}
-
+	
 	// 3. gets all products from the database
 	public static void getAllProducts() throws SQLException{
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/walmart", "root", "root");
@@ -125,12 +104,12 @@ public class Main {
 		while(rs.next()) {
 			System.out.println(rs.getString(1) + " " + rs.getString(2));
 		}
-
+		
 	}
 
 	// 4. update, 5. search, 6. get me all total sales for today ?????
-
-
+	
+	
 	// search db using a name
 	public static Product GetProduct(String name) {
 		for (Product product : products) {
@@ -169,4 +148,4 @@ public class Main {
 		}
 	}
 
-} 
+}
